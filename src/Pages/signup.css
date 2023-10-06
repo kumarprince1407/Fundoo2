@@ -1,0 +1,154 @@
+.signupContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.signupMainContainer {
+  margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 900px;
+  height: 570px;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.signupMainContainer1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 60%;
+}
+
+.signupMainContainer1 img {
+  margin-top: 5%;
+  width: 100px;
+  height: 30px;
+}
+
+
+
+
+
+.signupTextField1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 45px;
+  border-radius: 2px;
+  margin-left: 5%;
+  
+}
+
+.signupTextField2{
+  margin-left: 5%;
+  
+  
+}
+
+.loginEmailSign{
+  margin-left: 5%;
+  margin-right: 55%
+
+}
+
+.signupTextField3{
+  margin-left: 5%;
+
+  
+}
+
+.signupCheckbox1{
+  margin-left: 5%;
+  margin-right: 70%;
+  
+}
+
+.next{
+  margin-left: 5%;
+  
+}
+
+#signupFname {
+  width: 45%;
+}
+
+
+#signupLname {
+  width: 45%;
+}
+
+#userName {
+  width: 98%;
+  height: 45px;
+}
+
+.loginEmailSign {
+  color: rgb(73, 73, 172);
+  text-decoration: none; /*To remove underline from the clickable link*/
+}
+
+.span1 {
+  font-size: 12px;
+  color: grey;
+  margin-right: 59%;
+}
+
+.signupTextField3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 45px;
+  border-radius: 2px;
+}
+
+#signupPassword,
+#signupConfirmPassword {
+  width: 45%;
+}
+
+.passwordSubtext{
+margin-right: 2%;
+}
+
+.signupCheckbox1{
+ margin-right:65%;
+}
+
+.next {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+#emailSignin {
+  color: rgb(73, 73, 172);
+  text-decoration: none; /*To remove underline from the clickable link*/
+}
+
+#signupButton1 {
+  width: 75px;
+  color: white;
+  background-color: rgb(73, 73, 172);
+  border-radius: 5px;
+  height: 30px;
+  border: none;
+}
+
+.signupMainContainer2 {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+}
+
+.signupMainContainer2 img {
+  width: 100%;
+  height: 50%;
+  margin-top: 45%;
+}
+#signupContainer2Text {
+  margin-left: 10%;
+}

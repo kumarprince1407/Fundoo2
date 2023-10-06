@@ -1,0 +1,172 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.loginMainContainer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.loginMainContainer2 {
+  margin-top: 2%;
+  margin: 5px;
+   width: 400px; 
+  height: 520px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 15%;
+  padding-right: 10%;
+}
+
+.loginMainContainer2 img {
+  margin-top: 40%;
+  width: 100px;
+  height: 30px;
+}
+
+.login {
+  font-size: 25px;
+}
+
+#loginText1 {
+  font-size: 15px;
+}
+
+
+
+input {
+  width: 250px;
+  height: 40px;
+}
+
+.signupForgotPassword {
+  color: blue;
+  font-size: 16px;
+  margin-right: 32%;
+  text-decoration: none;
+}
+
+.loginAccount {
+  color: blue;
+  font-size: 16px;
+  margin-right: 0px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+  
+}
+
+#loginButton1 {
+  margin-left: 40px;
+  width: 75px;
+  color: white;
+  background-color: rgb(73, 73, 172);
+  border-radius: 2px;
+  height: 30px;
+  border: none;
+}
+/*Media queryfor iPhone SE*/
+@media (max-width: 375px) {
+  .loginMainContainer {
+    width: 360px !important;
+  }
+  .loginMainContainer2 {
+    border: 0px solid black;
+  }
+
+}
+
+/*Media queryfor iPhone XR*/
+@media (max-width: 414px) {
+  .loginMainContainer {
+    width: 400px !important;
+  }
+
+  .loginMainContainer2 {
+    border: 0px solid black;
+  }
+}
+
+/*Media queryfor iPhone 12 Pro*/
+@media (max-width: 390px) {
+  .loginMainContainer {
+    width: 346px;
+  }
+
+  .loginMainContainer2 {
+    border: 0px solid black;
+  }
+}
+
+/*Media queryfor Pixel5*/
+@media (max-width: 395px) {
+  .loginMainContainer {
+    width: 360px;
+  }
+
+  .loginMainContainer2 {
+    border: 0px solid black;
+  }
+}
+
+/*Media queryfor iPad Mini*/
+@media (max-width: 768px) {
+  .loginMainContainer {
+    width: 700px;
+  }
+
+.signupForgotPassword {
+  margin-right: 25%;
+}
+
+}
+
+/*Media queryfor iPad Air*/
+@media (max-width: 820px) {
+  .loginMainContainer {
+    width: 800px !important;
+  }
+
+.signupForgotPassword {
+  margin-right: 25%;
+}
+
+}
+
+/*Media queryfor SurfacePro7*/
+@media (max-width: 912px) {
+  .loginMainContainer {
+    width: 880px;
+  }
+}
+/*Media queryfor SurfaceDuo*/
+@media (max-width: 540px) {
+  .loginMainContainer {
+    width: 500px;
+  }
+}
+
+/*Media queryfor NextHub*/
+@media (max-width: 1024px) {
+  .mainContainer {
+    width: 980px;
+  }
+}
+
+/*Media queryfor NextMax*/
+@media (max-width: 1280px) {
+  .loginMainContainer {
+    width: 900px !important;
+    justify-content: center;
+    align-items: center;
+  }
+}
