@@ -39,6 +39,10 @@ const Dashboard = () => {
 
   //state to display current notes
   const [currentNotes, setCurrentNotes] = useState([]);
+  //Change
+  //State for filtered note
+  const [filteredNotes, setFilteredNotes] = useState([]);
+  const [searchText, setSearchText] = useState(""); // Define searchText state
 
   const toggleViewType = () => {
     setViewType((prevType) => (prevType === "grid" ? "list" : "grid"));
@@ -92,9 +96,25 @@ const Dashboard = () => {
     setShowDeleted(false);
   };
 
+  // Function to filter notes based on search text
+  const filterNotes = (searchText) => {
+    const filtered = currentNotes.filter((note) => {
+      const title = note.title.toLowerCase();
+      const description = note.description.toLowerCase();
+      const search = searchText.toLowerCase();
+      return title.includes(search) || description.includes(search);
+    });
+    setFilteredNotes(filtered);
+  };
+
   return (
     <Box>
-      <SearchBar handleToggle={handleToggle} toggleViewType={toggleViewType} />
+      <SearchBar
+        handleToggle={handleToggle}
+        toggleViewType={toggleViewType}
+        filterNotes={filterNotes} //Pass the filter notes function
+        setSearchText={setSearchText} //Pass setSearchText function
+      />
       <MiniDrawer2
         open={open}
         onArchiveClick={toggleArchiveNotes}
@@ -125,17 +145,25 @@ const Dashboard = () => {
             alignItems: viewType === "grid" ? "flex-start" : "center",
           }}
         >
-          {currentNotes.map((item) => (
-            <TakeNote3
-              key={item.id}
-              //The key prop is used to uniquely identify each item in the list.
-              // It's set to the id property of the item object.
-              noteData={item}
-              getNotes={getNotes}
-              viewType={viewType}
-              showDeleted={showDeleted}
-            />
-          ))}
+          {searchText.length === 0
+            ? currentNotes.map((item) => (
+                <TakeNote3
+                  key={item.id}
+                  noteData={item}
+                  getNotes={getNotes}
+                  viewType={viewType}
+                  showDeleted={showDeleted}
+                />
+              ))
+            : filteredNotes.map((item) => (
+                <TakeNote3
+                  key={item.id}
+                  noteData={item}
+                  getNotes={getNotes}
+                  viewType={viewType}
+                  showDeleted={showDeleted}
+                />
+              ))}
         </Box>
       </Box>
     </Box>

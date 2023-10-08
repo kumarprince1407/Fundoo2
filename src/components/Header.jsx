@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -71,10 +72,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
-export default function SearchBar({ handleToggle, toggleViewType }) {
+//Change
+export default function SearchBar({
+  handleToggle,
+  toggleViewType,
+  filterNotes,
+  setSearchText, //Prop for searching text
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  //Add state for search text
+  // const [searchText, setSearchText] = useState("");
+  // Handle input change
+  const handleSearchTextChange = (event) => {
+    setSearchText(event.target.value);
+    // Call the filterNotes function to filter notes based on the search text
+    filterNotes(event.target.value);
+  };
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -228,6 +243,8 @@ export default function SearchBar({ handleToggle, toggleViewType }) {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              // value={searchText} //Bind the value to the state
+              onChange={handleSearchTextChange} //Handle input change
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

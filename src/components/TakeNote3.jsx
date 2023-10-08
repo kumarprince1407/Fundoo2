@@ -11,7 +11,9 @@ import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-//Change
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
+
 import {
   FormControlLabel,
   IconButton,
@@ -28,16 +30,6 @@ import {
 } from "../services/noteService";
 
 const TakeNote3 = ({ noteData, getNotes, viewType, showDeleted }) => {
-  // const [title, setTitle] = useState(noteData.title);
-  // const [description, setDescription] = useState(noteData.description);
-
-  //The useEffect hook is used to update the title and description state variables when
-  // the noteData prop changes. It sets the state values to match the current noteData.
-  // useEffect(() => {
-  //   setTitle(noteData.title);
-  //   setDescription(noteData.description);
-  // }, [noteData]);
-
   const archiveTextItem = async () => {
     // the async keyword indicates that the function will contain asynchronous operations
     const data = { noteIdList: [noteData.id], isArchived: true };
@@ -54,12 +46,36 @@ const TakeNote3 = ({ noteData, getNotes, viewType, showDeleted }) => {
     //Calling the getNotes function defined in Dashboard
   };
 
-  //deleteSelf
+  //delete
   const deleteTextItem = async () => {
     const data = { noteIdList: [noteData.id], isDeleted: true };
     await deleteItem(data);
     getNotes();
   };
+
+  const deleteForeverItem = async () => {
+    const data = { noteIdList: [noteData.id] };
+    await deleteForever(data);
+    getNotes();
+  };
+
+  const restoreFromTrashItem = async () => {
+    const data = { noteIdList: [noteData.id], isDeleted: false };
+    await updateNotes(data);
+    setIsDeleted(false); //Update the local state
+    getNotes();
+  };
+  // Determine whether the note is deleted, and set the 'isDeleted' state accordingly
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [isArchived, setIsArchived] = useState(true);
+
+  useEffect(() => {
+    setIsDeleted(noteData.isDeleted === true);
+  }, [noteData.isDeleted]);
+
+  useEffect(() => {
+    setIsArchived(noteData.isArchived === false);
+  }, [noteData.isArchived]);
 
   return (
     <Box
@@ -128,39 +144,47 @@ const TakeNote3 = ({ noteData, getNotes, viewType, showDeleted }) => {
           }}
         />
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
-        <IconButton>
-          <AddAlertOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <PersonAddAltOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <ImageOutlinedIcon />
-        </IconButton>
-        <ColorPalette
-          fontSize="12px"
-          action={"edit"}
-          noteId={noteData.id}
-          updatecolor={getNotes}
-        />
-        <IconButton onClick={archiveTextItem}>
-          <ArchiveOutlinedIcon />
-        </IconButton>
-        <IconButton onClick={deleteTextItem}>
-          <DeleteOutlineOutlinedIcon />
-        </IconButton>
-        {/* start */}
-        {/* <IconButton>
-          <DeleteNote
-            noteId={noteData.id}
-            updateData={getNotes}
-            showDeleted={showDeleted}
-            deleteForever={deleteForever}
-          />
-        </IconButton> */}
-        {/* end */}
-        <IconButton></IconButton>
+      <Box
+        className="box3"
+        // className for box
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        {isDeleted && isArchived ? (
+          <>
+            <IconButton>
+              <RestoreFromTrashIcon onClick={restoreFromTrashItem} />
+            </IconButton>
+            <IconButton>
+              <DeleteForeverIcon onClick={deleteForeverItem} />
+            </IconButton>
+          </>
+        ) : (
+          <>
+            <IconButton>
+              <AddAlertOutlinedIcon />
+            </IconButton>
+            <IconButton>
+              <PersonAddAltOutlinedIcon />
+            </IconButton>
+            <IconButton>
+              <ImageOutlinedIcon />
+            </IconButton>
+            <ColorPalette
+              fontSize="12px"
+              action={"edit"}
+              noteId={noteData.id}
+              updatecolor={getNotes}
+            />
+            <IconButton onClick={archiveTextItem}>
+              <ArchiveOutlinedIcon />
+            </IconButton>
+            <IconButton onClick={deleteTextItem}>
+              <DeleteOutlineOutlinedIcon />
+            </IconButton>
+
+            <IconButton></IconButton>
+          </>
+        )}
       </Box>
     </Box>
   );
