@@ -13,6 +13,7 @@ import noteService, {
   archiveItem,
   changeColor,
   deleteForever,
+  updateNotes,
 } from "../services/noteService";
 
 import { Box } from "@mui/material";
@@ -153,6 +154,7 @@ const Dashboard = () => {
                   getNotes={getNotes}
                   viewType={viewType}
                   showDeleted={showDeleted}
+                  updateNotes={updateNotes} // Pass the updateNotes function here
                 />
               ))
             : filteredNotes.map((item) => (
@@ -162,6 +164,7 @@ const Dashboard = () => {
                   getNotes={getNotes}
                   viewType={viewType}
                   showDeleted={showDeleted}
+                  updateNotes={updateNotes}
                 />
               ))}
         </Box>

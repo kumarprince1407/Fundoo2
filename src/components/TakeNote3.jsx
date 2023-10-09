@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import ColorPalette from "./ColourPalette";
 import DeleteNote from "./DeleteNote";
+import EditNote3 from "./EditNote3";
 
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
@@ -13,7 +14,7 @@ import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
-
+import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
 import {
   FormControlLabel,
   IconButton,
@@ -29,7 +30,44 @@ import {
   updateNotes,
 } from "../services/noteService";
 
-const TakeNote3 = ({ noteData, getNotes, viewType, showDeleted }) => {
+const TakeNote3 = ({
+  noteData,
+  getNotes,
+  viewType,
+  showDeleted,
+  updateNotes,
+}) => {
+  //Change
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedNote, setEditedNote] = useState({
+    title: noteData.title,
+    description: noteData.description,
+  });
+
+  const handleEditClick = async () => {
+    let data = {
+      noteId: noteData.id,
+      title: editedNote.title,
+      description: editedNote.description,
+    };
+
+    try {
+      const response = await updateNotes(data);
+      if (response.status === 200) {
+        getNotes();
+        setIsEditing(false);
+      } else {
+        console.log("Error updating note:", response.statusText);
+      }
+    } catch (error) {
+      console.log("Error updating note:", error);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
+
   const archiveTextItem = async () => {
     // the async keyword indicates that the function will contain asynchronous operations
     const data = { noteIdList: [noteData.id], isArchived: true };
@@ -44,6 +82,12 @@ const TakeNote3 = ({ noteData, getNotes, viewType, showDeleted }) => {
     await archiveItem(data);
     getNotes();
     //Calling the getNotes function defined in Dashboard
+  };
+
+  const unarchiveTextItem = async () => {
+    const data = { noteIdList: [noteData.id], isArchived: false };
+    await archiveItem(data);
+    getNotes();
   };
 
   //delete
@@ -175,9 +219,16 @@ const TakeNote3 = ({ noteData, getNotes, viewType, showDeleted }) => {
               noteId={noteData.id}
               updatecolor={getNotes}
             />
-            <IconButton onClick={archiveTextItem}>
-              <ArchiveOutlinedIcon />
-            </IconButton>
+            {!noteData.isArchived ? (
+              <IconButton onClick={archiveTextItem}>
+                <ArchiveOutlinedIcon />
+              </IconButton>
+            ) : (
+              <IconButton onClick={unarchiveTextItem}>
+                <UnarchiveOutlinedIcon />
+              </IconButton>
+            )}
+
             <IconButton onClick={deleteTextItem}>
               <DeleteOutlineOutlinedIcon />
             </IconButton>

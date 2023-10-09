@@ -99,7 +99,7 @@ export const deleteForever = async (data) => {
 export const updateNotes = async (data) => {
   console.log("updatedData", data);
   let response = await axios.post(
-    "http://fundoonotes.incubation.bridgelabz.com/api/notes/updateNotes",
+    `http://fundoonotes.incubation.bridgelabz.com/api/notes/updateNotes${data.noteId}`,
     data,
     checkAuth()
   );
